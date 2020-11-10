@@ -1,5 +1,4 @@
 use pyo3::prelude::{pymodule, PyModule, PyResult, Python};
-use std::ops::Range;
 
 #[pymodule]
 fn mypackage(_py: Python, m: &PyModule) -> PyResult<()> {
@@ -12,13 +11,12 @@ fn mypackage(_py: Python, m: &PyModule) -> PyResult<()> {
         } else if x % 2 == 0 || x % 3 == 0 || x % 5 == 0 {
             return false
         }
-        let r = Range { start: 1, end: x };
-        for i in r {
-            if x % i == 0 {
+        let mut k = 3;
+        while k*k <= x {
+            if x % k == 0 {
                 return false
-            } else if (i as f64) > (x as f64).sqrt() {
-                break
             }
+            k += 2
         }
         true
     }
