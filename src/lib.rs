@@ -23,8 +23,14 @@ fn mypackage(_py: Python, m: &PyModule) -> PyResult<()> {
 
     #[pyfn(m, "is_prime")]
     fn is_prime_py(_py: Python, x: i64) -> bool {
-        let r = is_prime(x);
-        r
+        is_prime(x)
+    }
+
+    #[pyfn(m, "example3")]
+    fn example3_py(_py: Python) {
+        for i in 1..10000000 {
+            is_prime(i);
+        }
     }
 
     Ok(())
